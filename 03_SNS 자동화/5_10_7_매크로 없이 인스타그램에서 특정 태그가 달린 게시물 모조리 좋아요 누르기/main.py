@@ -10,11 +10,9 @@ Book : 6개월 치 업무를 하루 만에 끝내는 업무 자동화
 Last Modification : 2020.03.02.
 """
 
-
 import sys
 import time
-import insta_bot_capture as ib
-import os
+import insta_bot_like as ib
 
 
 # 작업 시작 메시지를 출력합니다.
@@ -32,24 +30,17 @@ ps = sys.argv[2]
 # 검색할 태그를 입력받습니다.
 tag = sys.argv[3]
 
-# 결과물을 저장할 폴더 이름을 입력받습니다.
-directory = sys.argv[4]
-
-# 결과물을 저장할 폴더를 생성합니다.
-if directory not in os.listdir():
-    os.mkdir(directory)
-
 # 반복 회수를 입력받습니다.
-NUMBER = int(sys.argv[5].strip())
+NUMBER = int(sys.argv[4].strip())
 
 # 크롤러를 불러옵니다.
-BOT = ib.CaptureBot()
+BOT = ib.LikeBot()
 
 # 인스타그램 로그인을 합니다.
 BOT.login(id, ps)
 
 # 작업을 수행합니다.
-BOT.insta_jungdok(tag, directory, NUMBER)
+BOT.insta_jungdok(tag, NUMBER)
 
 # 크롤러를 닫아줍니다.
 BOT.kill()
