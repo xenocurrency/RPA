@@ -4,20 +4,21 @@
 
 >python multi_login.py <Excel File\>
 
-## Excel File 양식
+### 한계
+- 비번입력란에서 엔터를 쳐서 로그인이 실행 안되는 사이트라면 로그인 불가합니다.
+- 매크로 사용하였으므로 창전환 시 오류발생합니다. 헤드리스도 불가합니다.
+
+### Excel File 양식
 <Excel File\> 에는 사이트 별 로그인 정보를 적어줍니다. 
-- 한 사이트의 로그인 정보는 하나의 행에 입력합니다.
-- LOGIN URL
-- ID
-- PW
-- TAB FOR ID
-- TAB FOR PW
+- 한 사이트의 로그인 정보는 하나의 행에 입력합니다. 2행부터 입력합니다.
+- 1열 : LOGIN URL
+- 2열 : ID
+- 3열 : PW
+- 4열 : TAB FOR ID
+- 5열 : TAB FOR PW
 
-[사이트목록]
-1. 도매토피아 : https://dometopia.com/member/login
-2. 도매콜 : https://www.domecall.net/member/login.php
-3. 펀타스틱 : https://funtasticb2b.co.kr/member/login
-
-
-## 배치파일
+### 배치파일
 multi_login.bat 실행해도 동일한 기능을 수행합니다.
+
+### 종료
+로그인 후 작업을 완료하였다면 웹사이트 닫기를 직접 누르시기 바랍니다.

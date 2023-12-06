@@ -22,9 +22,8 @@ except ModuleNotFoundError:
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-
+import pywinmacro as pyw
+import time
 
 # LoginBot 클래스 목적 : 여러 웹사이트 로그인 후 창을 유지함
 class LoginBot:
@@ -33,12 +32,20 @@ class LoginBot:
 
         self.header = self.data_array[0]        # 헤더 리스트 분리
         self.contents = self.data_array[1:]     # 내용 리스트 분리
+        self.websites_qty = len(self.contents)      # 로그인 할 웹사이트 개수
 
-        self.URL = self.contents[0][0]      # 로그인 url
-        self.ID = self.contents[0][1]
-        self.PW = self.contents[0][2]
-        self.tab_for_ID = self.contents[0][3]       # URL 생성 이후 ID 입력창에 가기 위해 눌러야 하는 TAB 회수
-        self.tab_for_PW = self.contents[0][4]       # ID 입력 이후 PW 입력창에 가기 위해 눌러야 하는 TAB 회수
+        self.URL = []
+        self.ID = []
+        self.PW = []
+        self.tab_for_ID = []
+        self.tab_for_PW = []
+
+        for i in range(self.websites_qty):
+            self.URL.append(self.contents[i][0])      # 로그인 url
+            self.ID.append(self.contents[i][1])
+            self.PW.append(self.contents[i][2])
+            self.tab_for_ID.append(self.contents[i][3])       # URL 생성 이후 ID 입력창에 가기 위해 눌러야 하는 TAB 회수
+            self.tab_for_PW.append(self.contents[i][4])       # ID 입력 이후 PW 입력창에 가기 위해 눌러야 하는 TAB 회수
 
         self.options = Options()
         self.options.add_argument("--window-size=1024,768")
@@ -50,15 +57,26 @@ class LoginBot:
 
 
     def login(self):
-        self.driver.get(self.URL)
-        self.driver.
+        for i in range(self.websites_qty):
+            self.driver.execute_script("window.open('');")      #새창 열기
+            self.new_tab = self.driver.window_handles[-1]
+            self.driver.switch_to.window(self.new_tab)      #새창으로 전환
+            self.driver.get(self.URL[i])
+            time.sleep(2)
+            for j in range(self.tab_for_ID[i]):
+                pyw.key_press_once("tab")       # TAB을 지정횟수만큼 눌러 ID 입력창으로 이동
+            pyw.typing(self.ID[i])     # ID입력
+            for j in range(self.tab_for_PW[i]):
+                pyw.key_press_once("tab")       # TAB을 지정횟수만큼 눌러 PW 입력창으로 이동
+            pyw.typing(self.PW[i])     # PW입력
+            pyw.key_press_once("enter")     # 엔터쳐서 로그인이 안되는 사이트라면 로그인불가(이런 일이 거의 없어서 무시한다)
 
 
-    def print(self):
+    def print(self):        #프린트.테스트용
         print(self.header)
         print(self.contents)
         print("websites Q'ty = "+ str(len(self.contents)))
-        print(self.ID)
-        print(self.PW)
+        print(self.URL)
+
 
 
