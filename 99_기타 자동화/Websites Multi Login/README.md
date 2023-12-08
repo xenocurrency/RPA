@@ -17,6 +17,7 @@
 - 3열 : PW
 - 4열 : TAB FOR ID
 - 5열 : TAB FOR PW
+- 6열 : 랜딩페이지. 로그인 후 접속 url (생략가능)
 
 ### 배치파일
 multi_login.bat 실행해도 동일한 기능을 수행합니다.
