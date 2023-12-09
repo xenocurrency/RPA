@@ -76,7 +76,7 @@ class LoginBot:
             time.sleep(5)
             if len(self.landing_page[i]) == 0:
                 continue        #랜딩페이지가 공백이면 생략
-            self.driver.get(self.landing_page[i])       #랜딩페이지로 이동
+            self.driver.get(self.landing_page[i])       # 랜딩페이지가 공백이 아니면 랜딩페이지로 이동
 
 
     def print(self):        #프린트.테스트용
